@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    
+
+</head>
+<body>
+    <h1>Register Sayfası</h1>
+
+    <form class ="postform" method="POST">
+        {{ form.hidden_tag() }}
+
+        <p class="username">
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}
+        </p>
+        
+
+        <p class="password">
+            
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+
+        
+         <button class="btn" type="submit">Register</button>
+    </form>
+    <a class="regLink" href="{{ url_for('login') }}">Hesabın var mı? Giriş yap</a>
+
+
+      <!-- ✅ Flash mesajları buraya -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashed-messages">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+
+
+
+
+
+    
+</body>
+</html>

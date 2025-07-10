@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+     
+    
+</head>
+<body>
+    <h1>Merhaba, {{ current_user.username }}!</h1>
+    
+    <a class="dash-link" href="{{ url_for('logout') }}">Çıkış Yap</a>
+    
+
+
+
+</body>
+</html>
