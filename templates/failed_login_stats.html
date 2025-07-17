@@ -1,0 +1,33 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block title %} Login Page  {% endblock title %}
+
+
+{% block content %}
+
+
+  <h1>❌ Hatalı Giriş İstatistikleri</h1>
+<table>
+<tr><th>Kullanıcı Adı</th><th>Toplam Hatalı Deneme</th><th>Son Deneme</th></tr>
+{% for row in stats %}
+<tr>
+<td>{{ row.username_attempted }}</td>
+<td>{{ row.total_failed }}</td>
+<td>{{ row.last_attempt }}</td>
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+    

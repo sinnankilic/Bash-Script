@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
-    
 
-</head>
-<body>
-    <h1>Register Sayfası</h1>
+
+
+{% extends "layout.html" %}
+
+{% block title %} Home Page  {% endblock title %}
+
+
+{% block content %}
+
+
+  <h1>Register Sayfası</h1>
 
     <form class ="postform" method="POST">
         {{ form.hidden_tag() }}
@@ -28,7 +29,7 @@
         
          <button class="btn" type="submit">Register</button>
     </form>
-    <a class="regLink" href="{{ url_for('login') }}">Hesabın var mı? Giriş yap</a>
+    <a class="regLink" href="{{ url_for('main.login') }}">Hesabın var mı? Giriş yap</a>
 
 
       <!-- ✅ Flash mesajları buraya -->
@@ -44,10 +45,5 @@
 
 
 
-
-
-
-
+{% endblock content %}
     
-</body>
-</html>

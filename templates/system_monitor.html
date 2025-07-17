@@ -1,0 +1,25 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block title %} Login Page  {% endblock title %}
+
+
+{% block content %}
+
+
+  <h1>💻 Sistem Monitörü</h1>
+<p>CPU Kullanımı: {{ stats.cpu_percent }}%</p>
+<p>RAM Kullanımı: {{ stats.memory_percent }}%</p>
+<p>Disk Kullanımı: {{ stats.disk_percent }}%</p>
+<p>Gönderilen Bytes: {{ stats.net_io.bytes_sent }}</p>
+<p>Alınan Bytes: {{ stats.net_io.bytes_recv }}</p>
+
+
+
+
+
+
+{% endblock content %}
+    

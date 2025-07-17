@@ -1,19 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-     
-    
-</head>
-<body>
-    <h1>Merhaba, {{ current_user.username }}!</h1>
-    
-    <a class="dash-link" href="{{ url_for('logout') }}">Çıkış Yap</a>
-    
 
 
 
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %} Dashboard Page {% endblock title %}
+
+
+{% block content %}
+
+
+ <h1>Merhaba, {{ current_user.username }}!</h1>
+    
+    <a class="dash-link" href="{{ url_for('main.logout') }}">Çıkış Yap</a>
+
+
+    <a class="dash-link" href="{{ url_for('main.login_stats') }}">giriş bilgileri</a>
+
+    <a class="dash-link" href="{{ url_for('main.system_monitor') }}">sistem bilgileri</a>
+
+    <br>
+
+    <a class="dash-link" href="{{ url_for('main.failed_login_stats') }}">başarısız giriş</a>
+
+
+
+
+
+{% endblock content %}
+    

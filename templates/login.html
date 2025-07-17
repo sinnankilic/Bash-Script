@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Login</title>
-      <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-     
-</head>
-<body>
-      <h1>Login Sayfası </h1>
+
+
+
+{% extends "layout.html" %}
+
+{% block title %} Login Page  {% endblock title %}
+
+
+{% block content %}
+
+
+  <h1>Login Sayfası </h1>
 
       
       <form class="postform" method="POST">
@@ -24,9 +25,12 @@
             {{ form.password(size=32) }}
         </p>
         
-         <button class="btn" type="submit">Register</button>
+         <button class="btn" type="submit">Login</button>
     </form>
-       <a class="login-link" href="{{url_for('register')}}">Kaydolmak için Tıkla</a> 
+       <a class="login-link" href="{{url_for('main.register')}}">Kaydolmak için Tıkla</a> 
+
+
+       
 
 
 
@@ -35,7 +39,5 @@
 
 
 
-
-
-</body>
-</html>
+{% endblock content %}
+    
