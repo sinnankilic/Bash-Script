@@ -80,24 +80,19 @@ def logout():
     logout_user()
     return redirect(url_for('main.login'))
 
-from flask import render_template
 
 @main.app_errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
 from sqlalchemy import text
-from flask import render_template
-from flask_login import login_required, current_user
 
-from sqlalchemy import text
-from sqlalchemy import text
-from flask_login import login_required
+
 
 @main.route('/login-stats')
 @login_required
 def login_stats():
-    # Kullanıcı bazlı login istatistikleri
+    
     user_stats = db.session.execute(text("""
         SELECT 
             u.username AS username,
@@ -111,7 +106,7 @@ def login_stats():
         ORDER BY year DESC, month DESC, total_logins DESC                              
     """)).fetchall()
 
-    # Genel başarı/başarısızlık istatistikleri
+    
     counts = db.session.execute(text("""
         SELECT
             (SELECT COUNT(*) FROM failed_login_log) AS failed_count,
@@ -152,10 +147,7 @@ def system_monitor():
 
 
 
-from datetime import datetime, timedelta
-from sqlalchemy import text
-from . import db
-from .logger import warn_logger
+
 
 
 
@@ -175,8 +167,97 @@ def check_last_login_route():
 
 
 
+import plotly.graph_objects as go
+from anomaly_detect import prepare_graph_data
+
+@main.route('/anomaly-detect')
+def anomaly_detect():
+    summary = prepare_graph_data()
+
+    
+    fig_counts = go.Figure()
+
+  
+    fig_counts.add_trace(
+        go.Scatter(
+            x=summary['hour'],
+            y=summary['total_requests'],
+            name='Total Requests',
+            yaxis='y1'
+        )
+    )
+
+    
+    fig_counts.add_trace(
+        go.Scatter(
+            x=summary['hour'],
+            y=summary['error_count'],
+            name='Error Count',
+            yaxis='y2'
+        )
+    )
+
+    fig_counts.update_layout(
+        title='Request ve Error Sayısı',
+        xaxis=dict(title='Time'),
+        yaxis=dict(title='Total Requests', range=[0, 1500]),
+        yaxis2=dict(
+            title='Error Count',
+            overlaying='y',
+            side='right',
+            range=[0, 100]  
+        ),
+        legend=dict(x=0, y=1.1, orientation='h')
+    )
+
+
+    import plotly.express as px
+    fig_latency = px.line(
+        summary,
+        x='hour',
+        y='avg_latency',
+        title='Ortalama Latency Sayıları',
+        labels={'avg_latency': 'Latency (ms)', 'hour': 'Time'}
+    )
+    fig_latency.update_layout(yaxis_range=[0, 1500])
+
+  
+    graph_counts_html = fig_counts.to_html(full_html=False)
+    graph_latency_html = fig_latency.to_html(full_html=False)
+
+    return render_template('anomaly_detect.html', graph_counts=graph_counts_html, graph_latency=graph_latency_html)
+
+
+
+
+from flask import render_template, jsonify, request
+import pandas as pd
+import random
+from datetime import datetime, timedelta
 
 
 
 
 
+
+@main.route('/anomaly-detect')
+def show_logs():
+    return render_template('anomaly_detect.html')
+
+@main.route('/log-data')
+def log_data():
+    method = request.args.get('method', 'ALL')
+
+    
+    df = pd.read_csv('data/requestlogs.logs.csv',dtype={'timestamp': 'int64'})
+
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    df['hour'] = df['timestamp'].dt.floor('h')
+
+    if method in ['GET', 'POST']:
+        df = df[df['method'] == method]
+
+    grouped = df.groupby(['hour', 'method']).size().reset_index(name='count')
+    grouped['hour'] = grouped['hour'].astype(str)
+
+    return jsonify(grouped.to_dict(orient='records'))

@@ -3,11 +3,13 @@ body{
       font-family: Arial, sans-serif;
 }
 
-h1{
+.register-title {
       text-align: center;
       color: #020202;
-      font-size: 30px;
+      font-size: 50px;
       font-family: 'Times New Roman', Times, serif;
+      margin-top: 50px;
+       margin-bottom: 40px;
 }
 .regLink{
       text-decoration: none;

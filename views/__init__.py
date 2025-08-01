@@ -10,13 +10,18 @@ login_manager.login_view = 'main.login'
 
 def create_app():
 
-    TEMPLATE_DIR=os.path.abspath("../templates")
-    STATIC_DIR=os.path.abspath("../static")
+    
+    
 
-
+    
 
 
     app = Flask(__name__)
+    TEMPLATE_DIR=os.path.abspath("../templates")
+
+    app._static_folder="../static"
+
+    
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:12345@localhost/mydatabase'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'secretkey'

@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %} Anomaly Page {% endblock title %}
+
+{% block content %}
+
+<div class="anomaly-container">
+    <h2 class="section-title">📊 Logs Takip Ekranı</h2>
+
+    <div class="graph-section">
+        <h3>Request and Error Sayıları</h3>
+        <div class="graph-box">
+            {{ graph_counts|safe }}
+        </div>
+
+        <h3>Ortalama Latency Sayıları</h3>
+        <div class="graph-box">
+            {{ graph_latency|safe }}
+        </div>
+    </div>
+
+    
+
+   <h2 class="section-title">📈 İstek Tipine Göre Log Grafiği</h2>
+
+    <div id="log-chart" class="graph-box"></div>
+    
+
+</div>
+
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    async function loadGraph(method) {
+        const response = await fetch(`/log-data?method=${method}`);
+        const data = await response.json();
+
+        const grouped = {};
+
+        data.forEach(entry => {
+            const time = entry.hour;
+            const method = entry.method;
+
+            if (!grouped[method]) grouped[method] = { x: [], y: [], name: method, type: 'scatter' };
+            grouped[method].x.push(time);
+            grouped[method].y.push(entry.count);
+        });
+
+        const layout = {
+            title: 'İstek Sayısı Zamanla',
+            xaxis: { title: 'Zaman' },
+            yaxis: { title: 'İstek Sayısı', range: [0, 400] }
+        };
+
+        Plotly.newPlot('log-chart', Object.values(grouped), layout);
+    }
+
+    loadGraph('ALL');
+</script>
+
+ <div class="btn-group">
+        <button onclick="loadGraph('ALL')">Tümü</button>
+        <button onclick="loadGraph('GET')">GET</button>
+        <button onclick="loadGraph('POST')">POST</button>
+    </div>
+    
+
+{% endblock content %}

@@ -1,30 +1,39 @@
-
-
-
 {% extends "layout.html" %}
-
 {% block title %} Dashboard Page {% endblock title %}
 
-
 {% block content %}
+<br>
+<h1 class="dash-title">Merhaba, {{ current_user.username }}!</h1>
+
+<div class="dashboard-container">
+  
+  <div class="dashboard-item">
+    <img src="{{ url_for('static', filename='images/login-pic.PNG') }}" alt="Login" class="dashboard-image">
+    <a class="dash-link" href="{{ url_for('main.login_stats') }}">Giriş Bilgileri</a>
+  </div>
+
+ 
+  <div class="dashboard-item">
+    <img src="{{ url_for('static', filename='images/system-detail.PNG') }}" alt="System" class="dashboard-image">
+    <a class="dash-link" href="{{ url_for('main.system_monitor') }}">Sistem Bilgileri</a>
+  </div>
+
+  
+  <div class="dashboard-item">
+    <img src="{{ url_for('static', filename='images/failed-pic.PNG') }}" alt="Failed" class="dashboard-image">
+    <a class="dash-link" href="{{ url_for('main.failed_login_stats') }}">Başarısız Giriş</a>
+  </div>
+
+  
+  <div class="dashboard-item">
+    <img src="{{ url_for('static', filename='images/anomaly-pic.png') }}" alt="Anomaly" class="dashboard-image">
+    <a class="dash-link" href="{{ url_for('main.anomaly_detect') }}">Anomaly Grafik</a>
+  </div>
+</div>
 
 
- <h1>Merhaba, {{ current_user.username }}!</h1>
-    
-    <a class="dash-link" href="{{ url_for('main.logout') }}">Çıkış Yap</a>
-
-
-    <a class="dash-link" href="{{ url_for('main.login_stats') }}">giriş bilgileri</a>
-
-    <a class="dash-link" href="{{ url_for('main.system_monitor') }}">sistem bilgileri</a>
-
-    <br>
-
-    <a class="dash-link" href="{{ url_for('main.failed_login_stats') }}">başarısız giriş</a>
-
-
-
-
-
+<div class="logout-button">
+  <a class="dash-link" href="{{ url_for('main.logout') }}">Çıkış Yap</a>
+</div>
 {% endblock content %}
-    
+

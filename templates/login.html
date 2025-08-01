@@ -9,7 +9,7 @@
 {% block content %}
 
 
-  <h1>Login Sayfası </h1>
+  <h1 class="login-title">Giriş Sayfası </h1>
 
       
       <form class="postform" method="POST">
@@ -25,9 +25,9 @@
             {{ form.password(size=32) }}
         </p>
         
-         <button class="btn" type="submit">Login</button>
+         <button class="btn" type="submit">Giriş Yap</button>
     </form>
-       <a class="login-link" href="{{url_for('main.register')}}">Kaydolmak için Tıkla</a> 
+       <a class="login-form" href="{{url_for('main.register')}}">Kaydolmak için Tıkla</a> 
 
 
        

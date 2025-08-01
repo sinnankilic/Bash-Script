@@ -1,9 +1,4 @@
 
-
-
-
-
-
 {% extends "layout.html" %}
 
 {% block title %} Home Page  {% endblock title %}
@@ -12,13 +7,24 @@
 {% block content %}
 
 
-   <h1 class="home-header" >Home Sayfası</h1>
+   <h1 class="home-header" >Hoşgeldiniz </h1>
 
-      <a class="login-link" href="{{ url_for('main.login') }}">Login</a>
+    <div class="container">
+  <img src="{{ url_for('static', filename='images/butun.jpg') }}" alt="Home Page Foto" class="main-image">
+
+  <div class="link-row">
+   
+    <a href="/register" class="btn">Hala Kaydolmadıysan Kaydol</a>
+      <a href="/login" class="btn">Daha Önce Kaydolduysan Giriş Yap</a>
+
+  </div>
+</div>
+
+
+     
+
+
       
-      <br>
-      <br>
-      <a class="register-link" href="{{ url_for('main.register') }}">Register</a>
 
 
       

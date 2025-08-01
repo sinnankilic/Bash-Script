@@ -1,33 +1,30 @@
-
-
-
 {% extends "layout.html" %}
 
-{% block title %} Login Page  {% endblock title %}
-
+{% block title %}Login Page{% endblock title %}
 
 {% block content %}
-
-
+<div class="failed-login-container">
   <h1>❌ Hatalı Giriş İstatistikleri</h1>
-<table>
-<tr><th>Kullanıcı Adı</th><th>Toplam Hatalı Deneme</th><th>Son Deneme</th></tr>
-{% for row in stats %}
-<tr>
-<td>{{ row.username_attempted }}</td>
-<td>{{ row.total_failed }}</td>
-<td>{{ row.last_attempt }}</td>
-</tr>
-{% endfor %}
-</table>
 
+  <img src="{{ url_for('static', filename='images/failed-icon.png') }}" alt="Hatalı Giriş" class="failed-image">
 
+  <div class="failed-table-wrapper">
+    <table class="failed-table">
+      <tr>
+        <th>Kullanıcı Adı</th>
+        <th>Toplam Hatalı Deneme</th>
+        <th>Son Deneme</th>
+      </tr>
+      {% for row in stats %}
+      <tr>
+        <td>{{ row.username_attempted }}</td>
+        <td>{{ row.total_failed }}</td>
+        <td>{{ row.last_attempt }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-
-
-
-
-
-
+  <a class="login-link" href="{{ url_for('main.dashboard') }}">🔙 Dashboard'a Git</a>
+</div>
 {% endblock content %}
-    

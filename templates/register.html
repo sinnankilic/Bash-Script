@@ -9,7 +9,7 @@
 {% block content %}
 
 
-  <h1>Register Sayfası</h1>
+  <h1 class="register-title">Kayıt Sayfası</h1>
 
     <form class ="postform" method="POST">
         {{ form.hidden_tag() }}
@@ -27,12 +27,12 @@
         </p>
 
         
-         <button class="btn" type="submit">Register</button>
+         <button class="btn" type="submit">Kaydol</button>
     </form>
     <a class="regLink" href="{{ url_for('main.login') }}">Hesabın var mı? Giriş yap</a>
 
 
-      <!-- ✅ Flash mesajları buraya -->
+
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class="flashed-messages">

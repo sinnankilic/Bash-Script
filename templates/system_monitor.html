@@ -1,25 +1,21 @@
-
-
-
 {% extends "layout.html" %}
 
-{% block title %} Login Page  {% endblock title %}
-
+{% block title %}Sistem Monitörü{% endblock title %}
 
 {% block content %}
+<div class="monitor-container">
+    <img class="monitor-image" src="{{ url_for('static', filename='images/system-monitor.jpg') }}" alt="Sistem Monitörü Görseli">
 
-
-  <h1>💻 Sistem Monitörü</h1>
-<p>CPU Kullanımı: {{ stats.cpu_percent }}%</p>
-<p>RAM Kullanımı: {{ stats.memory_percent }}%</p>
-<p>Disk Kullanımı: {{ stats.disk_percent }}%</p>
-<p>Gönderilen Bytes: {{ stats.net_io.bytes_sent }}</p>
-<p>Alınan Bytes: {{ stats.net_io.bytes_recv }}</p>
-
-
-
-
-
-
-{% endblock content %}
+    <h1> Sistem Monitörü</h1>
     
+    <div class="monitor-stats">
+        <p><strong>CPU Kullanımı:</strong> {{ stats.cpu_percent }}%</p>
+        <p><strong>RAM Kullanımı:</strong> {{ stats.memory_percent }}%</p>
+        <p><strong>Disk Kullanımı:</strong> {{ stats.disk_percent }}%</p>
+        <p><strong>Gönderilen Bytes:</strong> {{ stats.net_io.bytes_sent }}</p>
+        <p><strong>Alınan Bytes:</strong> {{ stats.net_io.bytes_recv }}</p>
+    </div>
+
+    <a class="dashboard-link" href="{{ url_for('main.dashboard') }}">Dashboard'a Git</a>
+</div>
+{% endblock content %}

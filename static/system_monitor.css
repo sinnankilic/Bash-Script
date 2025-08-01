@@ -1,0 +1,43 @@
+.monitor-container {
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.monitor-image {
+    max-width: 30%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.monitor-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.monitor-stats p {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    color: #444;
+}
+
+.dashboard-link {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 20px;
+    background-color: #bd0bae;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.dashboard-link:hover {
+    background-color: #0056b3;
+}
